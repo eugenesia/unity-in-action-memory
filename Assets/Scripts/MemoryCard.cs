@@ -10,6 +10,24 @@ public class MemoryCard : MonoBehaviour {
 	// Sprite asset that will be loaded.
 	[SerializeField] private Sprite image;
 
+	// SceneController to coordinate card actions.
+	[SerializeField] private SceneController controller;
+
+	// ID of the sprite used in the card.
+	private int _id;
+	public int id {
+		get {return _id;}
+	}
+
+
+	// Public method that other scripts can use to pass new sprites to
+	// this object.
+	public void SetCard(int id, Sprite image) {
+		_id = id;
+		// Change the image used on this object.
+		GetComponent<SpriteRenderer>().sprite = image;
+	}
+
 	// Use this for initialization
 	void Start () {
 		// Set the sprite for this SpriteRender component.
