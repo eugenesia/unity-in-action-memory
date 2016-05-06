@@ -7,9 +7,6 @@ public class MemoryCard : MonoBehaviour {
 	// Sprite representing back of the card.
 	[SerializeField] private GameObject cardBack;
 
-	// Sprite asset that will be loaded.
-	[SerializeField] private Sprite image;
-
 	// SceneController to coordinate card actions.
 	[SerializeField] private SceneController controller;
 
@@ -30,8 +27,6 @@ public class MemoryCard : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		// Set the sprite for this SpriteRender component.
-		GetComponent<SpriteRenderer>().sprite = image;
 	}
 	
 	// Update is called once per frame
