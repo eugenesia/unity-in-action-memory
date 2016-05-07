@@ -24,6 +24,10 @@ public class SceneController : MonoBehaviour {
 
 		Vector3 startPos = originalCard.transform.position;
 
+		// Pair of IDs for all 4 card sprites.
+		int[] numbers = {0, 0, 1, 1, 2, 2, 3, 3};
+		numbers = ShuffleArray(numbers);
+
 		// Clone the original card and place it on the grid.
 		for (int i = 0; i < gridCols; i++) {
 			for (int j = 0; j < gridRows; j++) {
@@ -41,9 +45,11 @@ public class SceneController : MonoBehaviour {
 					card = Instantiate(originalCard) as MemoryCard;
 				}
 
-				int id = Random.Range(0, images.Length);
-				// Set the card's image asset to a random one, and set
-				// its ID to correspond to the selected image.
+				// Retrive IDs from the shuffled list instead of random numbers.
+				int index = j * gridCols + i;
+				int id = numbers[index];
+
+				// Set card's ID to correspond to the selected image.
 				card.SetCard(id, images[id]);
 
 				// Place cloned card in the grid.
@@ -52,6 +58,18 @@ public class SceneController : MonoBehaviour {
 				card.transform.position = new Vector3(posX, posY, startPos.z);
 			}
 		}
+	}
+
+	// Knuth shuffle algorithm to shuffle an int array.
+	private int[] ShuffleArray(int[] numbers) {
+		int[] newArray = numbers.Clone() as int[];
+		for (int i = 0; i < newArray.Length; i++) {
+			int tmp = newArray[i];
+			int r = Random.Range(i, newArray.Length);
+			newArray[i] = newArray[r];
+			newArray[r] = tmp;
+		}
+		return newArray;
 	}
 	
 	// Update is called once per frame
