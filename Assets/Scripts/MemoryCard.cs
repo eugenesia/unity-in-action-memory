@@ -36,9 +36,21 @@ public class MemoryCard : MonoBehaviour {
 	public void OnMouseDown() {
 
 		// Only deactivate if object is currently active/visible.
-		if (cardBack.activeSelf) {
+		// Check the controller's canReveal property, to make sure only
+		// two cards are revealed at a time.
+		if (cardBack.activeSelf && controller.canReveal) {
+
 			// Set object inactive/invisible.
 			cardBack.SetActive(false);
+
+			// Notify controller when this card is revealed.
+			controller.CardRevealed(this);
 		}
+	}
+
+	// For SceneController to hide the card again (by turning card_back
+	// back on.
+	public void Unreveal() {
+		cardBack.SetActive(true);
 	}
 }

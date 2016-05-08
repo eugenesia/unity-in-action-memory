@@ -18,6 +18,22 @@ public class SceneController : MonoBehaviour {
 	// Array of references to the sprite assets.
 	[SerializeField] private Sprite[] images;
 
+	// Keep track of revealed cards.
+	private MemoryCard _firstRevealed;
+	private MemoryCard _secondRevealed;
+
+
+	// Getter function that returns false if there's already a 2nd
+	// card revealed.
+	public bool canReveal {
+		get {return _secondRevealed == null;}
+	}
+
+	// For a card to inform the controller that it has been revealed,
+	// for tracking purposes.
+	public void CardRevealed(MemoryCard card) {
+		// initially empty.
+	}
 
 	// Use this for initialization
 	void Start () {
