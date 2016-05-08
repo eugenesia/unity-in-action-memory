@@ -32,7 +32,15 @@ public class SceneController : MonoBehaviour {
 	// For a card to inform the controller that it has been revealed,
 	// for tracking purposes.
 	public void CardRevealed(MemoryCard card) {
-		// initially empty.
+		// Store card objects in one of the two card variables, depending on
+		// if the first variable is already occupied.
+		if (_firstRevealed == null) {
+			_firstRevealed = card;
+		} else {
+			_secondRevealed = card;
+			// Compare IDs of the 2 revealed cards to check for match.
+			Debug.Log("Match? " + (_firstRevealed.id == _secondRevealed.id));
+		}
 	}
 
 	// Use this for initialization
