@@ -22,6 +22,8 @@ public class SceneController : MonoBehaviour {
 	private MemoryCard _firstRevealed;
 	private MemoryCard _secondRevealed;
 
+	private int _score = 0;
+
 
 	// Getter function that returns false if there's already a 2nd
 	// card revealed.
@@ -40,6 +42,7 @@ public class SceneController : MonoBehaviour {
 			_secondRevealed = card;
 			// Compare IDs of the 2 revealed cards to check for match.
 			Debug.Log("Match? " + (_firstRevealed.id == _secondRevealed.id));
+			StartCoroutine(CheckMatch());
 		}
 	}
 
@@ -99,5 +102,27 @@ public class SceneController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	// Check for matches and hide non-matching revealed cards.
+	private IEnumerator CheckMatch() {
+		// Increment score if revealed cards match.
+		if (_firstRevealed.id == _secondRevealed.id) {
+			_score++;
+			Debug.Log("Score: " + _score);
+		}
+		else {
+			// Pause for half a second for user to see and remember mismatched
+			// cards.
+			yield return new WaitForSeconds(.5f);
+
+			// Hide cards if they don't match.
+			_firstRevealed.Unreveal();
+			_secondRevealed.Unreveal();
+		}
+
+		// Clear out the variables whether or not a match was made.
+		_firstRevealed = null;
+		_secondRevealed = null;
 	}
 }
