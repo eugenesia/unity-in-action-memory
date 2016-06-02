@@ -46,6 +46,12 @@ public class SceneController : MonoBehaviour {
 		}
 	}
 
+	// Restart the level.
+	public void Restart() {
+		// Scene asset named "Scene1" is loaded with this command.
+		Application.LoadLevel("Scene1");
+	}
+
 	// Use this for initialization
 	void Start () {
 
